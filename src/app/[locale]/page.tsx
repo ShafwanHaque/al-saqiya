@@ -1,9 +1,11 @@
-import Image from "next/image";
+import HeroCarousel from '@/components/HeroCarousel';
 
 export default function Home() {
   return (
-    <div className="">
-      <h1>Home Page</h1>
-    </div>
+    <>
+      <HeroCarousel />
+      {/* Packages section goes here next */}
+      {/* Contact form section goes here next */}
+    </>
   );
 }
