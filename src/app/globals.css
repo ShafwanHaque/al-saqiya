@@ -24,3 +24,19 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer base {
+  button {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .nav-button {
+    @apply text-sm font-medium text-[#D4AF37] transition-colors hover:text-[#F4E7B3];
+  }
+
+  .nav-divider {
+    @apply text-[#F4E7B3];
+  }
+}
