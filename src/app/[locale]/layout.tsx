@@ -1,10 +1,16 @@
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer"
 import { bornobangla } from "@/fonts/bangla";
+
+export const metadata: Metadata = {
+  title: 'Al Saqiya',
+  description: 'Best Air Ticket and Visa Agency in Chittagong. Specialized in Hajj & Umrah and Hotel Booking.',
+};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

@@ -10,7 +10,7 @@ export default function LocaleSwitcher() {
   const pathname = usePathname();
 
   const otherLocale = routing.locales.find((l) => l !== locale);
-console.log({ locale, locales: routing.locales, otherLocale });
+
   return (
     <button
       type="button"

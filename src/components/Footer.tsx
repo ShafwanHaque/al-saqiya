@@ -75,7 +75,7 @@ export default function Footer() {
 
         <div className="w-full border-t border-white/10 mt-6 pt-4">
           <p className="text-xs text-white/50">
-            © {new Date().getFullYear()} SKIDOO. {t("rights")}
+            © {new Date().getFullYear()} Al-Saqiya Tours and Travels. {t("rights")}
           </p>
         </div>
       </div>

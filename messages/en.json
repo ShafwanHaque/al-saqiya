@@ -8,5 +8,10 @@
   "footer": {
     "tagline": "Your trusted partner for Hajj, Umrah, and luxury travel experiences.",
     "rights": "All rights reserved."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "Sorry, we couldn't find the page you were looking for.",
+    "backHome": "Back to home"
   }
 }
