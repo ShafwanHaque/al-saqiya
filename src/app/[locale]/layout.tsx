@@ -5,7 +5,8 @@ import { routing } from "@/i18n/routing";
 import "../globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer"
-import { bornobangla } from "@/fonts/bangla";
+import { bangla } from "@/fonts/bangla";
+import { english } from "@/fonts/english";
 
 export const metadata: Metadata = {
   title: 'Al Saqiya',
@@ -30,7 +31,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
-      <body  className={locale === 'bn' ? bornobangla.className : ''}>
+      <body  className={locale === 'bn' ? bangla.className : english.className}>
         <NextIntlClientProvider>
           <Header />
           {children}

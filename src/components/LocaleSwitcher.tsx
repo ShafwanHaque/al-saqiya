@@ -15,7 +15,7 @@ export default function LocaleSwitcher() {
     <button
       type="button"
       onClick={() => router.replace(pathname, { locale: otherLocale })}
-      className="text-sm font-medium tracking-wide border border-neutral-300 rounded-full px-3 py-1 hover:border-neutral-500 transition-colors"
+      className="text-sm font-medium tracking-wide border border-neutral-300 rounded-full px-3 py-1 hover:border-neutral-500 transition-colors bg-white"
     >
       {locale === 'en' ? 'বাংলা' : 'English'}
     </button>

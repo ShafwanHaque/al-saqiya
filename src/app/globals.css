@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f4e7b3;
+  --foreground: #004d40;
 }
 
 @theme inline {
@@ -40,6 +40,15 @@ body {
 
   .primary-button:hover {
     background: linear-gradient(to right, #f4e7b3, #d4af37, #f4e7b3);
-    border-color: 1px solid #d4af37;
+    border: 2px solid #004d40;
+    color: #17665f;
+  }
+
+  .contact-input {
+    @apply w-full rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-800 outline-none transition-all duration-200 placeholder:text-neutral-400;
+  }
+
+  .contact-input:focus {
+    @apply border-[#D4AF37] ring-2 ring-[#D4AF37]/15;
   }
 }

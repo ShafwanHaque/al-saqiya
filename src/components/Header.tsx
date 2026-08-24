@@ -7,7 +7,7 @@ export default function Header() {
   const t = useTranslations("nav");
 
   return (
-    <header className="w-full border-b border-neutral-200 bg-[#004D40]">
+    <header className="sticky top-0 z-50 w-full border-b border-neutral-200 bg-[#004D40]">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
         <Link

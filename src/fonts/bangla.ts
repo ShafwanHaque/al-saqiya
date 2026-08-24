@@ -1,17 +1,15 @@
 import localFont from "next/font/local";
 
-export const bornobangla = localFont({
+export const bangla = localFont({
   src: [
     {
-      //   path: './bangla/FNBornobangla-Regular.ttf',
       path: "./bangla/FNRakibBornomalaUnicode.ttf",
-      weight: "400",
+      weight: "600",
       style: "normal",
     },
     {
-      //   path: './bangla/FNBornobangla-Italic.ttf',
       path: "./bangla/FNRakibBornomalaUnicodeItalic.ttf",
-      weight: "400",
+      weight: "600",
       style: "italic",
     },
   ],
