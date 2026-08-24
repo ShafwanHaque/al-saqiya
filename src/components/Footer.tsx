@@ -2,8 +2,8 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 
-const FACEBOOK_URL = "https://facebook.com/yourpage"; // replace with real page URL
-const WHATSAPP_URL = "https://wa.me/8801XXXXXXXXX"; // replace with real number, no + or leading 0s after country code
+const FACEBOOK_URL = "https://www.facebook.com/alsaqiya.toursandtravles"; // replace with real page URL
+const WHATSAPP_URL = "https://wa.me/8801883138711"; // replace with real number, no + or leading 0s after country code
 
 function FacebookIcon() {
   return (
@@ -38,18 +38,15 @@ export default function Footer() {
   return (
     <footer className="w-full bg-[#004D40] border-t border-white/10">
       <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col items-center gap-4 text-center">
-        <Link
-          href="/"
-          className="text-lg font-serif tracking-wide "
-        >
+        <Link href="/" className="text-lg font-serif tracking-wide ">
           <Image
-                      src="/logo.png"
-                      alt="Al-Saqiya"
-                      width={189}
-                      height={100}
-                      priority
-                      className="h-[50px] w-auto object-contain"
-                    />
+            src="/logo.png"
+            alt="Al-Saqiya"
+            width={189}
+            height={100}
+            priority
+            className="h-[50px] w-auto object-contain"
+          />
         </Link>
 
         <p className="text-sm text-white/70 max-w-md">{t("tagline")}</p>
@@ -78,8 +75,7 @@ export default function Footer() {
 
         <div className="w-full border-t border-white/10 mt-6 pt-4">
           <p className="text-xs text-white/50">
-            © {new Date().getFullYear()} SKIDOO.{" "}
-            {t("rights")}
+            © {new Date().getFullYear()} SKIDOO. {t("rights")}
           </p>
         </div>
       </div>
