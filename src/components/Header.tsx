@@ -19,11 +19,11 @@ export default function Header() {
   return (
 
     <header className="w-full border-b border-neutral-200 bg-[#004D40]">
-      <div className="max-w-6xl mx-auto flex items-center justify-between gap-4 px-4 py-3 sm:px-6 sm:py-4">
+      <div className="max-w-6xl mx-auto flex items-center justify-between gap-2 px-3 py-3 sm:gap-4 sm:px-6 sm:py-4">
         {/* Logo */}
         <Link
           href="/"
-          className="flex shrink-0 items-center"
+          className="flex min-w-0 shrink items-center"
           onClick={() => setOpen(false)}
         >
           <Image
@@ -32,7 +32,7 @@ export default function Header() {
             width={189}
             height={50}
             priority
-            className="h-10 w-auto object-contain sm:h-[50px]"
+            className="h-8 w-auto object-contain sm:h-10 md:h-[50px]"
           />
         </Link>
 
@@ -58,14 +58,14 @@ export default function Header() {
         </div>
 
         {/* Mobile: locale toggle + hamburger */}
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="flex shrink-0 items-center gap-2 md:hidden">
           <LocaleSwitcher />
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[#D4AF37] transition-colors hover:bg-white/10"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[#D4AF37] transition-colors hover:bg-white/10 sm:h-9 sm:w-9"
           >
             <span className="relative block h-4 w-5">
               <span
