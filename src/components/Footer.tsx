@@ -37,7 +37,7 @@ export default function Footer() {
 
   return (
     <footer className="w-full bg-[#004D40] border-t border-white/10">
-      <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col items-center gap-4 text-center">
+      <div className="max-w-6xl mx-auto px-4 py-8 sm:px-6 sm:py-10 flex flex-col items-center gap-4 text-center">
         <Link href="/" className="text-lg font-serif tracking-wide ">
           <Image
             src="/logo.png"
