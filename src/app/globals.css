@@ -5,6 +5,10 @@
   --foreground: #004d40;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -21,6 +25,24 @@ body {
 @layer base {
   button {
     cursor: pointer;
+  }
+}
+
+@keyframes hero-kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.09);
+  }
+}
+
+@keyframes hero-fill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
   }
 }
 

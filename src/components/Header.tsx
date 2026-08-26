@@ -13,12 +13,12 @@ export default function Header() {
   const links = [
     { href: "/packages", label: t("packages") },
     { href: "/hajj-umrah", label: t("hajjUmrah") },
-    { href: "/contact-us", label: t("contact") },
+    { href: "/#contact", label: t("contact") },
   ];
 
   return (
 
-    <header className="w-full border-b border-neutral-200 bg-[#004D40]">
+    <header className="sticky top-0 z-50 w-full border-b border-neutral-200 bg-[#004D40] shadow-sm">
       <div className="max-w-6xl mx-auto flex items-center justify-between gap-2 px-3 py-3 sm:gap-4 sm:px-6 sm:py-4">
         {/* Logo */}
         <Link
@@ -52,7 +52,7 @@ export default function Header() {
         <div className="hidden md:flex items-center gap-4">
           <LocaleSwitcher />
 
-          <Link href="/contact-us" className="primary-button">
+          <Link href="/#contact" className="primary-button">
             {t("planTrip")}
           </Link>
         </div>
@@ -106,7 +106,7 @@ export default function Header() {
             </Link>
           ))}
           <Link
-            href="/contact-us"
+            href="/#contact"
             onClick={() => setOpen(false)}
             className="primary-button !inline-block mt-2 text-center"
           >

@@ -3,7 +3,12 @@ import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { PACKAGES } from "@/assets/assets";
 
-export default function FeaturedPackages() {
+type FeaturedPackagesProps = {
+  /** Hide the "view all" CTA, e.g. when this is already rendered on the packages page itself. */
+  showViewAll?: boolean;
+};
+
+export default function FeaturedPackages({ showViewAll = true }: FeaturedPackagesProps) {
   const t = useTranslations("home");
 
   return (
@@ -52,11 +57,13 @@ export default function FeaturedPackages() {
         ))}
       </div>
 
-      <div className="text-center mt-12">
-        <Link href="/packages" className="primary-button">
-          {t("viewAll")}
-        </Link>
-      </div>
+      {showViewAll && (
+        <div className="text-center mt-12">
+          <Link href="/packages" className="primary-button">
+            {t("viewAll")}
+          </Link>
+        </div>
+      )}
     </section>
   );
 }

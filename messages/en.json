@@ -21,6 +21,35 @@
     "viewDetails": "View Details",
     "viewAll": "View All Packages"
   },
+  "hajjUmrah": {
+    "eyebrow": "Sacred Journeys",
+    "title": "Hajj & Umrah Packages",
+    "subtitle": "Travel with peace of mind on your spiritual journey — guided rituals, comfortable stays near the Haramain, and a team that takes care of every detail.",
+
+    "hajj": {
+      "title": "Hajj Package",
+      "description": "Complete the fifth pillar of Islam with our all-inclusive Hajj packages, built around comfort, guidance, and a stress-free journey to the holy cities.",
+      "features": [
+        "Group & private packages",
+        "Accommodation near the Haramain",
+        "Experienced religious guides",
+        "Visa, flight & Ziyarah arranged"
+      ],
+      "cta": "Enquire About Hajj"
+    },
+
+    "umrah": {
+      "title": "Umrah Package",
+      "description": "Perform Umrah at your own pace with flexible packages designed for families, couples, and solo travellers throughout the year.",
+      "features": [
+        "Flexible travel dates year-round",
+        "Hotels close to Masjid al-Haram",
+        "Dedicated support throughout your trip",
+        "Visa, flight & transport arranged"
+      ],
+      "cta": "Enquire About Umrah"
+    }
+  },
   "contact": {
     "eyebrow": "Contact Us",
     "title": "Let's Plan Your Journey",

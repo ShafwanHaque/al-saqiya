@@ -51,7 +51,7 @@ export default function ContactSection() {
   }
 
   return (
-    <section className="bg-[#F8F6F0] py-20">
+    <section id="contact" className="scroll-mt-20 bg-[#F8F6F0] py-20">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Heading */}
         <div className="text-center max-w-2xl mx-auto mb-14">
