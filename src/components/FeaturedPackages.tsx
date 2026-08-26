@@ -1,7 +1,8 @@
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { PACKAGES } from "@/assets/assets";
+import { PACKAGES_EN } from "@/assets/assets_en";
+import { PACKAGES_BN } from "@/assets/assets_bn";
 
 type FeaturedPackagesProps = {
   /** Hide the "view all" CTA, e.g. when this is already rendered on the packages page itself. */
@@ -10,6 +11,10 @@ type FeaturedPackagesProps = {
 
 export default function FeaturedPackages({ showViewAll = true }: FeaturedPackagesProps) {
   const t = useTranslations("home");
+  const locale = useLocale();
+
+  // Dynamically select data array based on active locale
+  const packages = locale === "bn" ? PACKAGES_BN : PACKAGES_EN;
 
   return (
     <section className="max-w-6xl mx-auto px-6 py-20">
@@ -23,13 +28,14 @@ export default function FeaturedPackages({ showViewAll = true }: FeaturedPackage
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {PACKAGES.map((pkg) => (
+        {packages.map((pkg) => (
           <div
             key={pkg.id}
             className="group rounded-lg overflow-hidden border border-neutral-200 hover:shadow-lg transition-shadow bg-white"
           >
             <Link href="/packages">
-              <div className="relative w-full aspect-4/3 overflow-hidden">
+              {/* Fixed aspect ratio class: aspect-[4/3] */}
+              <div className="relative w-full aspect-[4/3] overflow-hidden">
                 <Image
                   src={pkg.image}
                   alt={pkg.title}

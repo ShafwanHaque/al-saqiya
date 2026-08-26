@@ -9,15 +9,47 @@ export default function LocaleSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const otherLocale = routing.locales.find((l) => l !== locale);
+  const handleSwitch = (targetLocale: string) => {
+    if (targetLocale === locale) return;
+    router.replace(pathname, { locale: targetLocale });
+  };
+
+  const isEn = locale === 'en';
 
   return (
-    <button
-      type="button"
-      onClick={() => router.replace(pathname, { locale: otherLocale })}
-      className="shrink-0 whitespace-nowrap text-xs sm:text-sm font-medium tracking-wide border border-neutral-300 rounded-full px-2.5 py-1 sm:px-3 hover:border-neutral-500 transition-colors bg-white"
+    <div
+      role="group"
+      aria-label="Language Switcher"
+      className="relative shrink-0 inline-flex items-center bg-neutral-100 p-1 rounded-full border border-neutral-200 shadow-inner select-none"
     >
-      {locale === 'en' ? 'বাংলা' : 'English'}
-    </button>
+      {/* Animated Sliding Pill */}
+      <div
+        className={`absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-full bg-[#004D40] shadow-sm transition-transform duration-300 ease-out ${
+          isEn ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      />
+
+      {/* English Option */}
+      <button
+        type="button"
+        onClick={() => handleSwitch('en')}
+        className={`relative z-10 px-3 py-1 text-xs sm:text-sm font-semibold rounded-full transition-colors duration-200 min-w-[42px] text-center ${
+          isEn ? 'text-[#D4AF37]' : 'text-neutral-600 hover:text-neutral-900'
+        }`}
+      >
+        EN
+      </button>
+
+      {/* Bangla Option */}
+      <button
+        type="button"
+        onClick={() => handleSwitch('bn')}
+        className={`relative z-10 px-3 py-1 text-xs sm:text-sm font-semibold rounded-full transition-colors duration-200 min-w-[42px] text-center ${
+          !isEn ? 'text-[#D4AF37]' : 'text-neutral-600 hover:text-neutral-900'
+        }`}
+      >
+        বাং
+      </button>
+    </div>
   );
 }

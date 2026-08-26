@@ -2,41 +2,20 @@
 
 import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
-
-const SLIDES = [
-  {
-    id: 1,
-    src: "https://picsum.photos/1600/900?random=1",
-    alt: "Destination 1",
-  },
-  {
-    id: 2,
-    src: "https://picsum.photos/1600/900?random=2",
-    alt: "Destination 2",
-  },
-  {
-    id: 3,
-    src: "https://picsum.photos/1600/900?random=3",
-    alt: "Destination 3",
-  },
-  {
-    id: 4,
-    src: "https://picsum.photos/1600/900?random=4",
-    alt: "Destination 4",
-  },
-  {
-    id: 5,
-    src: "https://picsum.photos/1600/900?random=5",
-    alt: "Destination 5",
-  },
-];
+import { useLocale } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import { CAROUSEL_EN } from "@/assets/assets_en";
+import { CAROUSEL_BN } from "@/assets/assets_bn";
 
 const AUTO_ADVANCE_MS = 5000;
 
 export default function HeroCarousel() {
+  const locale = useLocale();
+  const slides = locale === "bn" ? CAROUSEL_BN : CAROUSEL_EN;
+
   const [active, setActive] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const total = SLIDES.length;
+  const total = slides.length;
 
   const next = useCallback(() => {
     setActive((i) => (i + 1) % total);
@@ -54,19 +33,20 @@ export default function HeroCarousel() {
 
   return (
     <div
-      className="group relative w-full h-[62vh] min-h-[320px] overflow-hidden bg-[#004D40] sm:h-[75vh] sm:min-h-[460px] lg:h-[88vh] lg:min-h-[560px]"
+      className="group relative w-full h-[62vh] min-h-[420px] overflow-hidden bg-[#004D40] sm:h-[75vh] sm:min-h-[500px] lg:h-[88vh] lg:min-h-[600px]"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {SLIDES.map((slide, i) => {
+      {slides.map((slide, i) => {
         const isActive = i === active;
         return (
           <div
             key={slide.id}
             className={`absolute inset-0 transition-opacity duration-[1400ms] ease-in-out ${
-              isActive ? "z-10 opacity-100" : "z-0 opacity-0"
+              isActive ? "z-10 opacity-100" : "z-0 opacity-0 pointer-events-none"
             }`}
           >
+            {/* Background Zooming Image */}
             <div
               key={isActive ? `zoom-active-${active}` : `zoom-idle-${i}`}
               className="absolute inset-0 [animation-fill-mode:forwards] [animation-name:hero-kenburns] [animation-timing-function:ease-out]"
@@ -84,13 +64,47 @@ export default function HeroCarousel() {
                 sizes="100vw"
               />
             </div>
-            {/* Brand-tinted gradient for legible controls + a richer, less flat look */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#00110d]/75 via-[#00110d]/10 to-[#00110d]/40" />
+
+            {/* Dark contrast gradient for readable text and controls */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#00110d]/90 via-[#00110d]/40 to-[#00110d]/30" />
+
+            {/* Slide Text Content & Dynamic Interactive CTA */}
+            <div className="absolute inset-0 z-10 flex items-center justify-center text-center px-6">
+              <div
+                className={`max-w-3xl transition-all duration-700 ease-out transform ${
+                  isActive ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+                }`}
+              >
+                {slide.tagline && (
+                  <span className="inline-block text-xs sm:text-sm font-bold tracking-[0.25em] text-[#D4AF37] uppercase mb-2 bg-[#004D40]/60 backdrop-blur-md px-3.5 py-1 rounded-full border border-[#D4AF37]/30">
+                    {slide.tagline}
+                  </span>
+                )}
+                
+                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-serif text-white font-bold leading-tight mb-3 sm:mb-4 drop-shadow-md">
+                  {slide.title}
+                </h1>
+                
+                {slide.description && (
+                  <p className="text-sm sm:text-base lg:text-lg text-neutral-200 max-w-xl mx-auto mb-6 sm:mb-8 font-light leading-relaxed">
+                    {slide.description}
+                  </p>
+                )}
+
+                {slide.ctaText && (
+                  <div>
+                    <Link href={slide.ctaLink || "/packages"} className="carousel-cta-button">
+                      <span>{slide.ctaText}</span>
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         );
       })}
 
-      {/* Prev / Next arrows */}
+      {/* Prev / Next Arrows */}
       <button
         type="button"
         onClick={prev}
@@ -112,9 +126,9 @@ export default function HeroCarousel() {
         </svg>
       </button>
 
-      {/* Bottom bar: progress-style slide indicators */}
+      {/* Bottom Progress Bars */}
       <div className="absolute inset-x-0 bottom-5 z-20 flex items-center justify-center gap-2 sm:bottom-7 sm:gap-2.5">
-        {SLIDES.map((slide, i) => {
+        {slides.map((slide, i) => {
           const isActive = i === active;
           const isPassed = i < active;
           return (
@@ -146,7 +160,7 @@ export default function HeroCarousel() {
         })}
       </div>
 
-      {/* Slide counter */}
+      {/* Counter */}
       <div className="absolute bottom-5 right-4 z-20 hidden text-xs font-semibold tracking-[0.2em] text-white/80 sm:block sm:right-6 sm:bottom-7">
         <span className="text-[#D4AF37]">{String(active + 1).padStart(2, "0")}</span>
         <span className="mx-1 text-white/50">/</span>

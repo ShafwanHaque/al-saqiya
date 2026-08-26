@@ -73,4 +73,25 @@ body {
   .contact-input:focus {
     @apply border-[#D4AF37] ring-2 ring-[#D4AF37]/15;
   }
+
+  .carousel-cta-button {
+    @apply relative inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm sm:text-base font-bold text-[#004D40] shadow-xl transition-all duration-300 overflow-hidden hover:scale-105 active:scale-95 hover:shadow-2xl hover:shadow-[#D4AF37]/30;
+    background: linear-gradient(135deg, #d4af37 0%, #f4e7b3 50%, #d4af37 100%);
+  }
+
+  /* Soft light sweep animation across the button */
+  .carousel-cta-button::after {
+    content: "";
+    @apply absolute inset-0 -translate-x-full transition-transform duration-1000 ease-out pointer-events-none;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+  }
+
+  .carousel-cta-button:hover::after {
+    @apply translate-x-full;
+  }
 }
