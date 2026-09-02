@@ -306,6 +306,7 @@ export default function ContactSection() {
               {/* =================================================
                   STATUS MESSAGE
               ================================================== */}
+              {/* STATUS MESSAGE */}
               {status && (
                 <div
                   role="status"
@@ -315,21 +316,14 @@ export default function ContactSection() {
                 </div>
               )}
 
-              {/* =================================================
-                  SUBMIT BUTTON
-              ================================================== */}
+              {/* SUBMIT BUTTON */}
               <button
                 type="submit"
                 disabled={loading}
-                className="primary-button !inline-flex w-full justify-center items-center disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full py-3.5 px-6 rounded-xl bg-[#004D40] text-white font-medium hover:bg-[#00382E] transition-colors disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
               >
                 {loading ? t("form.sending") : t("form.send")}
               </button>
-
-              {/* Privacy */}
-              <p className="text-xs text-center text-neutral-400">
-                {t("form.privacy")}
-              </p>
             </form>
           </div>
         </div>
@@ -337,10 +331,6 @@ export default function ContactSection() {
     </section>
   );
 }
-
-/* ===============================================================
-   CONTACT ITEM
-================================================================ */
 
 function ContactItem({
   icon,
@@ -354,28 +344,24 @@ function ContactItem({
   href?: string;
 }) {
   const content = (
-    <div className="flex gap-4">
-      {/* Icon */}
-      <div className="shrink-0 w-10 h-10 rounded-full bg-[#D4AF37]/15 text-[#D4AF37] flex items-center justify-center">
+    <div className="flex items-start gap-4">
+      <div className="p-3 bg-white/10 rounded-xl text-[#D4AF37] shrink-0">
         {icon}
       </div>
-
-      {/* Text */}
       <div>
-        <p className="text-sm text-white/50 mb-1">{title}</p>
-
-        <p className="text-sm font-medium text-white">{text}</p>
+        <p className="text-xs font-semibold tracking-wider uppercase text-white/60">
+          {title}
+        </p>
+        <p className="mt-0.5 text-sm font-medium text-white">{text}</p>
       </div>
     </div>
   );
 
-  if (href) {
-    return (
-      <a href={href} className="block hover:opacity-80 transition-opacity">
-        {content}
-      </a>
-    );
-  }
-
-  return content;
+  return href ? (
+    <a href={href} className="block hover:opacity-80 transition-opacity">
+      {content}
+    </a>
+  ) : (
+    content
+  );
 }
