@@ -33,7 +33,7 @@ export default function FeaturedPackages({ showViewAll = true }: FeaturedPackage
             key={pkg.id}
             className="group rounded-lg overflow-hidden border border-neutral-200 hover:shadow-lg transition-shadow bg-white"
           >
-            <Link href="/packages">
+            <Link href={`/packages/${pkg.id}`}>
               {/* Fixed aspect ratio class: aspect-[4/3] */}
               <div className="relative w-full aspect-[4/3] overflow-hidden">
                 <Image
