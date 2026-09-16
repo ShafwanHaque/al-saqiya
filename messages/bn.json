@@ -21,6 +21,12 @@
     "viewDetails": "বিস্তারিত দেখুন",
     "viewAll": "সব প্যাকেজ দেখুন"
   },
+  "packageDetails": {
+    "back": "প্যাকেজে ফিরে যান",
+    "notFoundTitle": "প্যাকেজ পাওয়া যায়নি",
+    "notFoundDescription": "আপনি যে প্যাকেজটি খুঁজছেন তা নেই অথবা সরিয়ে ফেলা হয়েছে।",
+    "browsePackages": "সব প্যাকেজ দেখুন"
+  },
   "hajjUmrah": {
     "eyebrow": "পবিত্র সফর",
     "title": "হজ্জ ও উমরাহ প্যাকেজ",

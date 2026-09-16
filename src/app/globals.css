@@ -9,6 +9,20 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -48,7 +62,11 @@ body {
 
 @layer components {
   .nav-button {
-    @apply whitespace-nowrap text-sm font-medium text-[#D4AF37] transition-colors hover:text-[#F4E7B3];
+    @apply relative whitespace-nowrap text-sm font-medium text-[#D4AF37] transition-colors hover:text-[#F4E7B3] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] focus-visible:ring-offset-2 focus-visible:ring-offset-[#004D40] rounded-sm;
+  }
+
+  .nav-button-active {
+    @apply text-[#F4E7B3] after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:rounded-full after:bg-[#D4AF37] after:content-[''];
   }
 
   .nav-divider {
@@ -56,7 +74,7 @@ body {
   }
 
   .primary-button {
-    @apply hidden sm:inline-block shrink-0 whitespace-nowrap text-sm font-semibold text-[#004D40] px-5 py-2 rounded-full transition-all duration-300;
+    @apply hidden sm:inline-block shrink-0 whitespace-nowrap text-sm font-semibold text-[#004D40] px-5 py-2 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#004D40] focus-visible:ring-offset-2;
     background: linear-gradient(to right, #d4af37, #f4e7b3, #d4af37);
   }
 
@@ -75,7 +93,7 @@ body {
   }
 
   .carousel-cta-button {
-    @apply relative inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm sm:text-base font-bold text-[#004D40] shadow-xl transition-all duration-300 overflow-hidden hover:scale-105 active:scale-95 hover:shadow-2xl hover:shadow-[#D4AF37]/30;
+    @apply relative inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm sm:text-base font-bold text-[#004D40] shadow-xl transition-all duration-300 overflow-hidden hover:scale-105 active:scale-95 hover:shadow-2xl hover:shadow-[#D4AF37]/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#004D40];
     background: linear-gradient(135deg, #d4af37 0%, #f4e7b3 50%, #d4af37 100%);
   }
 

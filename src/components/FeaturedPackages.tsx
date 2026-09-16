@@ -33,9 +33,12 @@ export default function FeaturedPackages({ showViewAll = true }: FeaturedPackage
             key={pkg.id}
             className="group rounded-lg overflow-hidden border border-neutral-200 hover:shadow-lg transition-shadow bg-white"
           >
-            <Link href={`/packages/${pkg.id}`}>
+            <Link
+              href={`/packages/${pkg.id}`}
+              className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] focus-visible:ring-offset-2 rounded-lg"
+            >
               {/* Fixed aspect ratio class: aspect-[4/3] */}
-              <div className="relative w-full aspect-[4/3] overflow-hidden">
+              <div className="relative w-full aspect-[4/3] overflow-hidden bg-neutral-100">
                 <Image
                   src={pkg.image}
                   alt={pkg.title}

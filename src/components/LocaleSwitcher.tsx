@@ -32,7 +32,8 @@ export default function LocaleSwitcher() {
       <button
         type="button"
         onClick={() => handleSwitch('en')}
-        className={`relative z-10 px-3 py-1 text-xs sm:text-sm font-semibold rounded-full transition-colors duration-200 min-w-[42px] text-center ${
+        aria-pressed={isEn}
+        className={`relative z-10 px-3 py-1 text-xs sm:text-sm font-semibold rounded-full transition-colors duration-200 min-w-[42px] text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#004D40] focus-visible:ring-offset-1 ${
           isEn ? 'text-[#D4AF37]' : 'text-neutral-600 hover:text-neutral-900'
         }`}
       >
@@ -43,7 +44,8 @@ export default function LocaleSwitcher() {
       <button
         type="button"
         onClick={() => handleSwitch('bn')}
-        className={`relative z-10 px-3 py-1 text-xs sm:text-sm font-semibold rounded-full transition-colors duration-200 min-w-[42px] text-center ${
+        aria-pressed={!isEn}
+        className={`relative z-10 px-3 py-1 text-xs sm:text-sm font-semibold rounded-full transition-colors duration-200 min-w-[42px] text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#004D40] focus-visible:ring-offset-1 ${
           !isEn ? 'text-[#D4AF37]' : 'text-neutral-600 hover:text-neutral-900'
         }`}
       >

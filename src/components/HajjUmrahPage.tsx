@@ -39,7 +39,7 @@ export default function HajjUmrahPage() {
               key={card.key}
               className="group rounded-2xl overflow-hidden border border-neutral-200 hover:shadow-lg transition-shadow bg-white flex flex-col"
             >
-              <div className="relative w-full aspect-4/3 overflow-hidden">
+              <div className="relative w-full aspect-4/3 overflow-hidden bg-neutral-100">
                 <Image
                   src={card.image}
                   alt={t(`${card.key}.title`)}

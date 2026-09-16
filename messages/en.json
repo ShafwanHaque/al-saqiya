@@ -21,6 +21,12 @@
     "viewDetails": "View Details",
     "viewAll": "View All Packages"
   },
+  "packageDetails": {
+    "back": "Back to Packages",
+    "notFoundTitle": "Package not found",
+    "notFoundDescription": "The package you're looking for doesn't exist or may have been removed.",
+    "browsePackages": "Browse All Packages"
+  },
   "hajjUmrah": {
     "eyebrow": "Sacred Journeys",
     "title": "Hajj & Umrah Packages",

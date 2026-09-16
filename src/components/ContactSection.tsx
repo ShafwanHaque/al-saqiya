@@ -165,7 +165,7 @@ export default function ContactSection() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3.5 px-6 rounded-xl bg-[#004D40] text-white font-medium hover:bg-[#00382E] transition-colors disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full py-3.5 px-6 rounded-xl bg-[#004D40] text-white font-medium hover:bg-[#00382E] transition-colors disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] focus-visible:ring-offset-2"
               >
                 {loading ? t("form.sending") : t("form.send")}
               </button>

@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import LocaleSwitcher from "./LocaleSwitcher";
 import Image from "next/image";
 
 export default function Header() {
   const t = useTranslations("nav");
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   const links = [
@@ -15,6 +16,9 @@ export default function Header() {
     { href: "/hajj-umrah", label: t("hajjUmrah") },
     { href: "/#contact", label: t("contact") },
   ];
+
+  const isActive = (href: string) =>
+    href !== "/#contact" && (pathname === href || pathname.startsWith(`${href}/`));
 
   return (
 
@@ -40,7 +44,11 @@ export default function Header() {
         <nav className="hidden md:flex items-center gap-6 lg:gap-8">
           {links.map(({ href, label }, i) => (
             <span key={href} className="flex items-center gap-6 lg:gap-8">
-              <Link href={href} className="nav-button">
+              <Link
+                href={href}
+                aria-current={isActive(href) ? "page" : undefined}
+                className={`nav-button ${isActive(href) ? "nav-button-active" : ""}`}
+              >
                 {label}
               </Link>
               {i < links.length - 1 && <span className="nav-divider">|</span>}
@@ -65,7 +73,7 @@ export default function Header() {
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[#D4AF37] transition-colors hover:bg-white/10 sm:h-9 sm:w-9"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[#D4AF37] transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] focus-visible:ring-offset-2 focus-visible:ring-offset-[#004D40] sm:h-9 sm:w-9"
           >
             <span className="relative block h-4 w-5">
               <span
@@ -100,7 +108,8 @@ export default function Header() {
               key={href}
               href={href}
               onClick={() => setOpen(false)}
-              className="nav-button py-2 text-base"
+              aria-current={isActive(href) ? "page" : undefined}
+              className={`nav-button py-2 text-base ${isActive(href) ? "nav-button-active" : ""}`}
             >
               {label}
             </Link>
