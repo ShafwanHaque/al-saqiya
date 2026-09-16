@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState, useRef } from "react";
-import { Mail, MapPin, Phone, Clock, ArrowUpRight, ShieldAlert } from "lucide-react";
+import { Mail, MapPin, Phone, Clock, ShieldAlert } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Turnstile, TurnstileInstance } from "@marsidev/react-turnstile";
 

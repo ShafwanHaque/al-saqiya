@@ -69,7 +69,7 @@ export default function HeroCarousel() {
             <div className="absolute inset-0 bg-gradient-to-t from-[#00110d]/90 via-[#00110d]/40 to-[#00110d]/30" />
 
             {/* Slide Text Content & Dynamic Interactive CTA */}
-            <div className="absolute inset-0 z-10 flex items-center justify-center text-center px-6">
+            <div className="absolute inset-0 z-10 flex items-center justify-center text-center px-14 sm:px-20 lg:px-8">
               <div
                 className={`max-w-3xl transition-all duration-700 ease-out transform ${
                   isActive ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"

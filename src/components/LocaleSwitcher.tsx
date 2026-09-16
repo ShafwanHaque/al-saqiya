@@ -2,7 +2,6 @@
 
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { useLocale } from 'next-intl';
-import { routing } from '@/i18n/routing';
 
 export default function LocaleSwitcher() {
   const locale = useLocale();

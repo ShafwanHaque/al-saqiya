@@ -68,12 +68,6 @@
       "description": "Whether you are planning Umrah, Hajj, or your next holiday, feel free to reach out to us."
     },
 
-    "map": {
-      "title": "Find Us",
-      "description": "Visit our office",
-      "directions": "Get Directions"
-    },
-
     "form": {
       "title": "Send Us a Message",
       "description": "Fill out the form and our team will get back to you shortly.",
@@ -93,8 +87,6 @@
       "subjects": {
         "umrah": "Umrah Package",
         "hajj": "Hajj Package",
-        "holiday": "Holiday Package",
-        "visa": "Visa Assistance",
         "general": "General Enquiry"
       },
 
