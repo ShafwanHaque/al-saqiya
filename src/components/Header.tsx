@@ -98,6 +98,8 @@ export default function Header() {
 
       {/* Mobile menu panel */}
       <div
+        inert={!open}
+        aria-hidden={!open}
         className={`md:hidden overflow-hidden transition-[max-height] duration-300 ease-in-out ${
           open ? "max-h-80" : "max-h-0"
         }`}

@@ -2,16 +2,16 @@ import { NextResponse } from "next/server";
 import { Redis } from "@upstash/redis";
 import { Ratelimit } from "@upstash/ratelimit";
 import nodemailer from "nodemailer";
+import { CONTACT_EMAIL } from "@/config/contact";
 
-const redis = Redis.fromEnv();
-
-// Sliding Window: Allow 2 free submissions every 15 minutes before triggering Turnstile fallback
-const ratelimit = new Ratelimit({
-  redis,
-  limiter: Ratelimit.slidingWindow(2, "15 m"),
-  analytics: true,
-  prefix: "@upstash/ratelimit/contact",
-});
+function getRateLimiter() {
+  return new Ratelimit({
+    redis: Redis.fromEnv(),
+    limiter: Ratelimit.slidingWindow(2, "15 m"),
+    analytics: true,
+    prefix: "@upstash/ratelimit/contact",
+  });
+}
 
 // Helper function to verify Turnstile Token against Cloudflare's siteverify API
 async function verifyTurnstileToken(token: string, ip: string): Promise<boolean> {
@@ -38,7 +38,9 @@ async function verifyTurnstileToken(token: string, ip: string): Promise<boolean>
 
 export async function POST(req: Request) {
   const ip =
-    req.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "127.0.0.1";
+    req.headers.get("x-real-ip")?.trim() ||
+    req.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
+    "127.0.0.1";
 
   // Parse payload
   let body: {
@@ -52,7 +54,15 @@ export async function POST(req: Request) {
   };
 
   try {
-    body = await req.json();
+    const rawBody = await req.text();
+    if (rawBody.length > 12_000) {
+      return NextResponse.json({ error: "Request is too large" }, { status: 413 });
+    }
+    const parsed: unknown = JSON.parse(rawBody);
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return NextResponse.json({ error: "Invalid request payload" }, { status: 400 });
+    }
+    body = parsed as typeof body;
   } catch {
     return NextResponse.json({ error: "Invalid request payload" }, { status: 400 });
   }
@@ -63,15 +73,40 @@ export async function POST(req: Request) {
   }
 
   const { name, email, phone, subject, message, turnstileToken } = body;
-  if (!name || !email || !phone || !subject || !message) {
+  if ([name, email, phone, subject, message].some((value) => typeof value !== "string" || !value.trim())) {
     return NextResponse.json({ error: "All fields are required" }, { status: 400 });
   }
 
+  const cleanName = name!.trim().replace(/[\r\n\u0000-\u001f\u007f]/g, " ");
+  const cleanEmail = email!.trim();
+  const cleanPhone = phone!.trim();
+  const cleanSubject = subject!.trim();
+  const cleanMessage = message!.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail) ||
+      !["Umrah Package", "Hajj Package", "General Enquiry"].includes(cleanSubject) ||
+      cleanName.length > 120 || cleanPhone.length > 40 || cleanMessage.length > 5000) {
+    return NextResponse.json({ error: "Please check the submitted information" }, { status: 400 });
+  }
+
+  if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+    return NextResponse.json({ error: "Contact form is temporarily unavailable" }, { status: 503 });
+  }
+
   // 2. Check Rate Limit
-  const { success } = await ratelimit.limit(ip);
+  let rateLimitPassed: boolean;
+  try {
+    const { success } = await getRateLimiter().limit(ip);
+    rateLimitPassed = success;
+  } catch (error) {
+    console.error("Contact rate limit error:", error);
+    return NextResponse.json({ error: "Contact form is temporarily unavailable" }, { status: 503 });
+  }
 
   // If rate limit failed, require a Turnstile Token as a fallback challenge
-  if (!success) {
+  if (!rateLimitPassed) {
+    if (!process.env.TURNSTILE_SECRET_KEY || !process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY) {
+      return NextResponse.json({ error: "Contact form verification is not configured" }, { status: 503 });
+    }
     if (!turnstileToken) {
       return NextResponse.json(
         {
@@ -107,10 +142,10 @@ export async function POST(req: Request) {
 
     await transporter.sendMail({
       from: `"Website Contact" <${process.env.GMAIL_USER}>`,
-      replyTo: `"${name}" <${email}>`,
-      to: "shafwanulhaquechowdhury@gmail.com",
-      subject: `[Contact Form] ${subject}`,
-      text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nSubject: ${subject}\n\nMessage:\n${message}`,
+      replyTo: `"${cleanName}" <${cleanEmail}>`,
+      to: process.env.CONTACT_RECIPIENT_EMAIL || CONTACT_EMAIL,
+      subject: `[Contact Form] ${cleanSubject}`,
+      text: `Name: ${cleanName}\nEmail: ${cleanEmail}\nPhone: ${cleanPhone}\nSubject: ${cleanSubject}\n\nMessage:\n${cleanMessage}`,
     });
 
     return NextResponse.json({ success: true }, { status: 200 });

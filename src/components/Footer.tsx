@@ -1,9 +1,10 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
+import { CONTACT_PHONE_E164 } from "@/config/contact";
 
-const FACEBOOK_URL = "https://www.facebook.com/alsaqiya.toursandtravles"; // replace with real page URL
-const WHATSAPP_URL = "https://wa.me/8801883138711"; // replace with real number, no + or leading 0s after country code
+const FACEBOOK_URL = process.env.NEXT_PUBLIC_FACEBOOK_URL;
+const WHATSAPP_URL = `https://wa.me/${CONTACT_PHONE_E164.replace("+", "")}`;
 
 function FacebookIcon() {
   return (
@@ -52,15 +53,17 @@ export default function Footer() {
         <p className="text-sm text-white/70 max-w-md">{t("tagline")}</p>
 
         <div className="flex items-center gap-5 mt-2">
-          <a
-            href={FACEBOOK_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Facebook"
-            className="text-[#D4AF37] hover:text-white transition-colors"
-          >
-            <FacebookIcon />
-          </a>
+          {FACEBOOK_URL && (
+            <a
+              href={FACEBOOK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="text-[#D4AF37] hover:text-white transition-colors"
+            >
+              <FacebookIcon />
+            </a>
+          )}
 
           <a
             href={WHATSAPP_URL}

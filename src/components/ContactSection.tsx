@@ -4,6 +4,7 @@ import { FormEvent, useState, useRef } from "react";
 import { Mail, MapPin, Phone, Clock, ShieldAlert } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Turnstile, TurnstileInstance } from "@marsidev/react-turnstile";
+import { CONTACT_PHONE_E164 } from "@/config/contact";
 
 export default function ContactSection() {
   const [loading, setLoading] = useState(false);
@@ -19,7 +20,7 @@ export default function ContactSection() {
 
     // If Turnstile was requested but user hasn't solved it yet
     if (showCaptcha && !turnstileToken) {
-      setStatus("Please complete the verification check before submitting.");
+      setStatus(t("form.verifyBeforeSubmit"));
       return;
     }
 
@@ -51,14 +52,14 @@ export default function ContactSection() {
       // Fallback triggered: Server requests Turnstile completion
       if (result.requireCaptcha) {
         setShowCaptcha(true);
-        setStatus(result.error);
+        setStatus(t("form.captchaRequired"));
         turnstileRef.current?.reset();
         setTurnstileToken(null);
         return;
       }
 
       if (!response.ok) {
-        throw new Error(result.error || t("form.error"));
+        throw new Error(t("form.error"));
       }
 
       // Success
@@ -76,6 +77,11 @@ export default function ContactSection() {
   return (
     <section id="contact" className="scroll-mt-20 bg-[#F8F6F0] py-20">
       <div className="max-w-6xl mx-auto px-6">
+        <div className="mx-auto mb-10 max-w-2xl text-center">
+          <p className="text-sm font-semibold tracking-[0.2em] uppercase text-[#D4AF37]">{t("eyebrow")}</p>
+          <h2 className="mt-2 text-3xl font-serif text-[#004D40]">{t("title")}</h2>
+          <p className="mt-3 text-neutral-600">{t("description")}</p>
+        </div>
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-8">
           {/* Left Info Column */}
           <div className="space-y-6">
@@ -83,7 +89,7 @@ export default function ContactSection() {
               <h3 className="text-2xl font-serif mb-7">{t("information.title")}</h3>
               <div className="space-y-6">
                 <ContactItem icon={<MapPin size={20} />} title={t("information.office")} text={t("information.address")} />
-                <ContactItem icon={<Phone size={20} />} title={t("information.phone")} text={t("information.phoneNumber")} href={`tel:${t("information.phoneNumber")}`} />
+                <ContactItem icon={<Phone size={20} />} title={t("information.phone")} text={t("information.phoneNumber")} href={`tel:${CONTACT_PHONE_E164}`} />
                 <ContactItem icon={<Mail size={20} />} title={t("information.email")} text={t("information.emailAddress")} href={`mailto:${t("information.emailAddress")}`} />
                 <ContactItem icon={<Clock size={20} />} title={t("information.hours")} text={t("information.hoursValue")} />
               </div>
@@ -92,6 +98,8 @@ export default function ContactSection() {
 
           {/* Right Form Column */}
           <div className="bg-white rounded-2xl border border-neutral-200 shadow-sm p-7 md:p-9">
+            <h3 className="text-xl font-serif text-[#004D40]">{t("form.title")}</h3>
+            <p className="mt-2 mb-6 text-sm text-neutral-600">{t("form.description")}</p>
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* Honeypot Input (Invisible to real users) */}
               <div className="hidden" aria-hidden="true">
@@ -144,14 +152,14 @@ export default function ContactSection() {
                 <div className="p-4 rounded-xl border border-yellow-200 bg-yellow-50/50 space-y-3">
                   <div className="flex items-center gap-2 text-yellow-800 text-sm font-medium">
                     <ShieldAlert size={18} />
-                    <span>Security verification required</span>
+                    <span>{t("form.securityRequired")}</span>
                   </div>
                   <Turnstile
                     ref={turnstileRef}
                     siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
                     onSuccess={(token) => setTurnstileToken(token)}
                     onExpire={() => setTurnstileToken(null)}
-                    onError={() => setStatus("Verification widget failed to load.")}
+                    onError={() => setStatus(t("form.verificationFailed"))}
                   />
                 </div>
               )}
@@ -170,6 +178,7 @@ export default function ContactSection() {
                 {loading ? t("form.sending") : t("form.send")}
               </button>
             </form>
+            <p className="mt-4 text-xs text-neutral-500">{t("form.privacy")}</p>
           </div>
         </div>
       </div>

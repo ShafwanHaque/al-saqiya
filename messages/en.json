@@ -101,6 +101,10 @@
 
       "send": "Send Message",
       "sending": "Sending...",
+      "verifyBeforeSubmit": "Please complete the verification check before submitting.",
+      "captchaRequired": "Please complete the security check, then submit again.",
+      "securityRequired": "Security verification required",
+      "verificationFailed": "Verification could not load. Please contact us by phone or email.",
 
       "success": "Thank you! Your message has been sent successfully.",
       "error": "Unable to send your message. Please try again.",

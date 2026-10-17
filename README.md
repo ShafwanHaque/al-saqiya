@@ -1,30 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Al Saqiya Tours and Travels
 
-## Getting Started
+Bilingual (English and Bangla) travel agency website for Al Saqiya in Chattogram, Bangladesh.
 
-First, run the development server:
+## Local development
 
 ```bash
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. Routes use `/en` and `/bn` locale prefixes.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Contact form configuration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Configure these environment variables in development and production:
 
-## Learn More
+- `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` for rate limiting.
+- `GMAIL_USER` and `GMAIL_APP_PASSWORD` for sending email through Gmail.
+- `TURNSTILE_SECRET_KEY` and `NEXT_PUBLIC_TURNSTILE_SITE_KEY` for the rate-limit fallback challenge.
+- `CONTACT_RECIPIENT_EMAIL` is optional; submissions default to the public contact email.
+- `NEXT_PUBLIC_FACEBOOK_URL` is optional and should point to the verified business page.
 
-To learn more about Next.js, take a look at the following resources:
+Without the required Gmail or Redis settings, the endpoint returns a temporary-unavailable response. If either Turnstile key is missing, submissions are stopped after the configured rate limit instead of showing a broken challenge.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Production
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+pnpm build
+pnpm start
+```

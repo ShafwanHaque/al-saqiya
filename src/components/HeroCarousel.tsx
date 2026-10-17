@@ -15,7 +15,17 @@ export default function HeroCarousel() {
 
   const [active, setActive] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [manuallyPaused, setManuallyPaused] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
   const total = slides.length;
+
+  useEffect(() => {
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
 
   const next = useCallback(() => {
     setActive((i) => (i + 1) % total);
@@ -26,16 +36,20 @@ export default function HeroCarousel() {
   };
 
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || manuallyPaused || reducedMotion) return;
     const timer = setInterval(next, AUTO_ADVANCE_MS);
     return () => clearInterval(timer);
-  }, [next, isPaused]);
+  }, [next, isPaused, manuallyPaused, reducedMotion]);
 
   return (
     <div
       className="group relative w-full h-[62vh] min-h-[420px] overflow-hidden bg-[#004D40] sm:h-[75vh] sm:min-h-[500px] lg:h-[88vh] lg:min-h-[600px]"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
+      onFocusCapture={() => setIsPaused(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setIsPaused(false);
+      }}
     >
       {slides.map((slide, i) => {
         const isActive = i === active;
@@ -45,6 +59,8 @@ export default function HeroCarousel() {
             className={`absolute inset-0 transition-opacity duration-[1400ms] ease-in-out ${
               isActive ? "z-10 opacity-100" : "z-0 opacity-0 pointer-events-none"
             }`}
+            aria-hidden={!isActive}
+            inert={!isActive}
           >
             {/* Background Zooming Image */}
             <div
@@ -105,6 +121,15 @@ export default function HeroCarousel() {
       })}
 
       {/* Prev / Next Arrows */}
+      <button
+        type="button"
+        onClick={() => setManuallyPaused((paused) => !paused)}
+        aria-label={manuallyPaused ? (locale === "bn" ? "স্লাইড চালু করুন" : "Resume slides") : (locale === "bn" ? "স্লাইড থামান" : "Pause slides")}
+        aria-pressed={manuallyPaused}
+        className="absolute right-4 top-4 z-20 rounded-full border border-white/25 bg-black/30 px-3 py-2 text-xs font-semibold text-white backdrop-blur-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+      >
+        {manuallyPaused ? (locale === "bn" ? "চালু" : "Play") : (locale === "bn" ? "থামান" : "Pause")}
+      </button>
       <button
         type="button"
         onClick={prev}
