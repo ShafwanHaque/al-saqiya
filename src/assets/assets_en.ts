@@ -6,7 +6,7 @@ export const CAROUSEL_EN = [
     description: "Experience a seamless pilgrimage with dedicated guidance and premium accommodations.",
     ctaText: "Bismillah",
     ctaLink: "/hajj-umrah",
-    src: "/carousel/hajj_umrah.jpeg",
+    src: "/carousel/hajj-umrah-hero.png",
     alt: "Hajj & Umrah Package",
   },
   {
@@ -16,7 +16,7 @@ export const CAROUSEL_EN = [
     description: "Fly to your dream destinations with our exclusive airline discounts and instant booking.",
     ctaText: "Let's Go Flying →",
     ctaLink: "/#contact",
-    src: "https://picsum.photos/1600/900?random=2",
+    src: "/carousel/worldwide-flights-hero.png",
     alt: "Air Tickets Deal",
   },
   {
@@ -26,8 +26,28 @@ export const CAROUSEL_EN = [
     description: "Tailor-made vacation packages designed for luxury, comfort, and unforgettable memories.",
     ctaText: "Explore Package →",
     ctaLink: "/packages/6",
-    src: "https://picsum.photos/1600/900?random=3",
+    src: "/carousel/bali-hero.png",
     alt: "Bali Vacation Package",
+  },
+  {
+    id: 4,
+    tagline: "FAMILY HOLIDAYS",
+    title: "Make Memories Together",
+    description: "Thoughtfully planned family getaways with comfortable stays, smooth travel, and something for everyone.",
+    ctaText: "Plan Your Family Trip →",
+    ctaLink: "/#contact",
+    src: "/carousel/family-holidays-hero.png",
+    alt: "Family enjoying a coastal holiday together",
+  },
+  {
+    id: 5,
+    tagline: "ADVENTURE ESCAPES",
+    title: "Go Further. Find Your Wild.",
+    description: "Discover mountain trails, breathtaking landscapes, and tailor-made adventures around the world.",
+    ctaText: "Plan Your Adventure →",
+    ctaLink: "/#contact",
+    src: "/carousel/adventure-escapes-hero.png",
+    alt: "Travelers taking in a dramatic alpine landscape",
   },
 ];
 

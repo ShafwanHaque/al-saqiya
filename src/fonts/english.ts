@@ -5,12 +5,12 @@ export const english = localFont({
   src: [
     {
       path: "./english/PlayfairDisplay-VariableFont_wght.ttf",
-      weight: "600",
+      weight: "400 900",
       style: "normal",
     },
     {
       path: "./english/PlayfairDisplay-Italic-VariableFont_wght.ttf",
-      weight: "600",
+      weight: "400 900",
       style: "italic",
     },
   ],

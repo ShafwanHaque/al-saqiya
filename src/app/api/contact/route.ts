@@ -4,6 +4,45 @@ import { Ratelimit } from "@upstash/ratelimit";
 import nodemailer from "nodemailer";
 import { CONTACT_EMAIL } from "@/config/contact";
 
+const MAX_REQUEST_BYTES = 12_000;
+
+async function readLimitedBody(request: Request): Promise<string | null> {
+  const contentLength = Number(request.headers.get("content-length"));
+  if (Number.isFinite(contentLength) && contentLength > MAX_REQUEST_BYTES) {
+    return null;
+  }
+
+  if (!request.body) return "";
+
+  const reader = request.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let totalBytes = 0;
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      totalBytes += value.byteLength;
+      if (totalBytes > MAX_REQUEST_BYTES) {
+        await reader.cancel();
+        return null;
+      }
+      chunks.push(value);
+    }
+  } finally {
+    reader.releaseLock();
+  }
+
+  const body = new Uint8Array(totalBytes);
+  let offset = 0;
+  for (const chunk of chunks) {
+    body.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return new TextDecoder().decode(body);
+}
+
 function getRateLimiter() {
   return new Ratelimit({
     redis: Redis.fromEnv(),
@@ -54,8 +93,8 @@ export async function POST(req: Request) {
   };
 
   try {
-    const rawBody = await req.text();
-    if (rawBody.length > 12_000) {
+    const rawBody = await readLimitedBody(req);
+    if (rawBody === null) {
       return NextResponse.json({ error: "Request is too large" }, { status: 413 });
     }
     const parsed: unknown = JSON.parse(rawBody);
