@@ -5,6 +5,7 @@ import { routing } from "@/i18n/routing";
 import "../globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer"
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { bangla } from "@/fonts/bangla";
 import { english } from "@/fonts/english";
 
@@ -36,6 +37,7 @@ export default async function LocaleLayout({
           <Header />
           {children}
           <Footer />
+          <WhatsAppButton />
         </NextIntlClientProvider>
       </body>
     </html>

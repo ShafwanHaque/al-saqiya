@@ -1,10 +1,10 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { CONTACT_PHONE_E164 } from "@/config/contact";
+import { CONTACT_WHATSAPP_E164 } from "@/config/contact";
 
 const FACEBOOK_URL = process.env.NEXT_PUBLIC_FACEBOOK_URL;
-const WHATSAPP_URL = `https://wa.me/${CONTACT_PHONE_E164.replace("+", "")}`;
+const WHATSAPP_URL = `https://wa.me/${CONTACT_WHATSAPP_E164.replace("+", "")}`;
 
 function FacebookIcon() {
   return (
