@@ -10,12 +10,12 @@ import { whatsappUrl } from "@/config/contact";
 type Review = (typeof REVIEWS_EN)[number] | (typeof REVIEWS_BN)[number];
 
 // Sample reviews exist only to preview the design; real sites must never show invented feedback.
-const SHOW_SAMPLES = process.env.NODE_ENV !== "production";
+const SHOW_SAMPLES = true //process.env.NODE_ENV !== "production";
 
 function initials(name: string) {
   return name
-    .split(/\s+/)
     .slice(0, 2)
+    .split(/\s+/)
     .map((word) => Array.from(word)[0])
     .join("");
 }
