@@ -16,16 +16,28 @@
   },
   "home": {
     "packagesTitle": "Our Packages",
-    "packagesSubtitle": "Handpicked journeys crafted for comfort, culture, and unforgettable memories.",
-    "startingFrom": "Starting from",
+    "packagesSubtitle": "Every journey is tailor-made — we shape each package around your dates, budget, and travel style.",
     "viewDetails": "View Details",
-    "viewAll": "View All Packages"
+    "viewAll": "View All Packages",
+    "tailorMade": "Tailor-made",
+    "sacredJourney": "Sacred Journey",
+    "price": "Price",
+    "negotiable": "Negotiable",
+    "getQuote": "Get a Quote",
+    "quoteMessage": "Assalamu Alaikum, I'm interested in the {title} package. Could you please share the details?",
+    "customTitle": "Have a different journey in mind?",
+    "customDescription": "Tell us where you want to go, when, and with whom — we'll arrange air tickets, visas, hotels, and everything in between.",
+    "customCta": "Plan My Trip",
+    "customWhatsapp": "Chat on WhatsApp",
+    "customMessage": "Assalamu Alaikum, I'd like to plan a custom trip. Could you please help me?"
   },
   "packageDetails": {
     "back": "Back to Packages",
     "notFoundTitle": "Package not found",
     "notFoundDescription": "The package you're looking for doesn't exist or may have been removed.",
-    "browsePackages": "Browse All Packages"
+    "browsePackages": "Browse All Packages",
+    "negotiableNote": "Pricing depends on your travel dates, group size, and preferences. Contact us for a personalised quote.",
+    "planCustom": "Customise This Trip"
   },
   "hajjUmrah": {
     "eyebrow": "Sacred Journeys",
@@ -111,5 +123,68 @@
 
       "privacy": "We respect your privacy and will only use your information to respond to your enquiry."
     }
+  },
+  "carousel": {
+    "label": "Featured travel offers",
+    "previous": "Previous slide",
+    "next": "Next slide",
+    "goTo": "Go to slide {number, number}",
+    "pause": "Pause",
+    "play": "Play",
+    "pauseLabel": "Pause slides",
+    "playLabel": "Resume slides"
+  },
+  "services": {
+    "eyebrow": "What We Do",
+    "title": "Travel Made Simple",
+    "subtitle": "From your first ticket to your final destination — one trusted team for every part of your journey.",
+    "specialty": "Our Specialty",
+    "air": {
+      "title": "Air Tickets",
+      "description": "Domestic and international flights at competitive fares, booked and managed for you.",
+      "features": [
+        "All major airlines, worldwide",
+        "One-way, return & multi-city",
+        "Date change & rebooking support"
+      ],
+      "cta": "Get Ticket Fare",
+      "message": "Assalamu Alaikum, I'd like to book an air ticket. Could you please share the available fares?"
+    },
+    "hajj": {
+      "title": "Hajj & Umrah",
+      "description": "Complete pilgrimage packages with visa, flights, hotels and guidance taken care of.",
+      "features": [
+        "Full Hajj & Umrah packages",
+        "Hotels close to the Haramain",
+        "Experienced guidance throughout"
+      ],
+      "cta": "Explore Packages"
+    },
+    "tours": {
+      "title": "Custom Tours",
+      "description": "Holidays planned around your budget, dates and travel style — for families, couples and groups.",
+      "features": [
+        "Tailor-made itineraries",
+        "Visa & hotel assistance",
+        "Family, honeymoon & group trips"
+      ],
+      "cta": "View Tour Ideas"
+    }
+  },
+  "reviews": {
+    "eyebrow": "Client Stories",
+    "title": "Trusted by Travellers & Pilgrims",
+    "subtitle": "Every journey we arrange is built on trust. Here's what our clients say about travelling with us.",
+    "rating": "Rated {rating, number} out of 5",
+    "sample": "Sample",
+    "readMore": "Read full story",
+    "close": "Close",
+    "storyHeading": "Their Journey",
+    "showReview": "Show review {number, number}",
+    "reviewsLabel": "Client reviews",
+    "shareTitle": "Travelled with us?",
+    "shareDescription": "We'd love to hear about your experience — your feedback helps other travellers and pilgrims choose with confidence.",
+    "shareCta": "Share Your Experience",
+    "shareMessage": "Assalamu Alaikum, I recently travelled with you and would like to share my experience."
   }
 }

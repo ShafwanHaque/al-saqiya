@@ -1,11 +1,9 @@
-import { CONTACT_WHATSAPP_E164 } from "@/config/contact";
-
-const WHATSAPP_URL = `https://wa.me/${CONTACT_WHATSAPP_E164.replace("+", "")}`;
+import { whatsappUrl } from "@/config/contact";
 
 export default function WhatsAppButton() {
   return (
     <a
-      href={WHATSAPP_URL}
+      href={whatsappUrl()}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"

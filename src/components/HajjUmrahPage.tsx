@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { Check } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 
 type PackageCard = {
   key: "hajj" | "umrah";
@@ -9,12 +9,13 @@ type PackageCard = {
 };
 
 const CARDS: PackageCard[] = [
-  { key: "hajj", image: "https://picsum.photos/900/700?random=21" },
-  { key: "umrah", image: "https://picsum.photos/900/700?random=22" },
+  { key: "hajj", image: "/carousel/hajj-umrah-hero.png" },
+  { key: "umrah", image: "/carousel/hajj_umrah.jpeg" },
 ];
 
 export default function HajjUmrahPage() {
   const t = useTranslations("hajjUmrah");
+  const tHome = useTranslations("home");
 
   return (
     <section className="max-w-6xl mx-auto px-6 py-20">
@@ -68,9 +69,18 @@ export default function HajjUmrahPage() {
                   ))}
                 </ul>
 
-                <Link href="/#contact" className="primary-button !inline-block text-center mt-auto">
-                  {t(`${card.key}.cta`)}
-                </Link>
+                <div className="mt-auto grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  <Link
+                    href={`/packages/${card.key}`}
+                    className="inline-flex items-center justify-center gap-1.5 rounded-full border border-[#004D40]/20 px-5 py-2 text-sm font-semibold text-[#004D40] transition-colors hover:border-[#004D40] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+                  >
+                    {tHome("viewDetails")}
+                    <ArrowRight size={14} aria-hidden="true" />
+                  </Link>
+                  <Link href="/#contact" className="primary-button !inline-block text-center">
+                    {t(`${card.key}.cta`)}
+                  </Link>
+                </div>
               </div>
             </div>
           );
